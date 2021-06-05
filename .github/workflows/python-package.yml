@@ -23,6 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        ls -la
         python -m pip install --upgrade pip
         python -m pip install flake8 pytest
         if [ -f Pipfile ]; then pipenv install; fi
