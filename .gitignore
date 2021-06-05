@@ -3,6 +3,7 @@
 # キャッシュはpushしない
 /dialy_api/migrations/__pycache__
 /dialy_api/__pycache__
-
+/utils/__pycache__
+/tests/__pycache__
 #db
 /db.sqlite3
