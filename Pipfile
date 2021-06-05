@@ -11,8 +11,11 @@ django-cors-headers = "*"
 uwsgi = "*"
 django-environ = "*"
 gunicorn = "*"
+pytest = "*"
+pytest-django = "*"
 
 [dev-packages]
+autopep8 = "*"
 
 [requires]
 python_version = "3.8"
