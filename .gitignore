@@ -7,3 +7,7 @@
 /tests/__pycache__
 #db
 /db.sqlite3
+
+
+# log無視
+**/logs/*
