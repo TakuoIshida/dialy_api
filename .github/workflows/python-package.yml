@@ -1,0 +1,37 @@
+name: pytest
+
+on:
+  push:
+    branches:
+      - master
+      - feature*
+  
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install flake8 pytest pipenv
+        if [ -f Pipfile ]; then pipenv install; fi
+    - name: Lint with flake8
+      run: |
+        # syntaxエラーがあったり、定義されていない名前があれば、ビルドを停止する
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zeroでは、すべてのエラーを警告として扱います。GitHubのエディタは127文字で表示されます
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: pytest 実行
+      run: |
+        pytest
